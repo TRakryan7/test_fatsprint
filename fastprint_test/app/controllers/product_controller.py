@@ -5,7 +5,7 @@ from ..forms import ProdukForm
 from ..helper import helper
 
 def produk_list(request):
-    produk = Produk.objects.filter(status_id=39).select_related('status').select_related('kategori').values('id', 'nama_produk', 'harga', 'status__nama_status', 'kategori__nama_kategori')
+    produk = Produk.objects.filter(status_id=1).select_related('status').select_related('kategori').values('id', 'nama_produk', 'harga', 'status__nama_status', 'kategori__nama_kategori')
     # print("product", produk)
     return render(request, 'produk_list.html', {'produk': produk})
 
