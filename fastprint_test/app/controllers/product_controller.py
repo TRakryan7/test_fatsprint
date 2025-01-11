@@ -39,7 +39,7 @@ def produk_generate(request):
         
         Produk.objects.bulk_create(obj_produk)
         produk = Produk.objects.select_related('status').select_related('kategori').values('id', 'nama_produk', 'harga', 'status__nama_status', 'kategori__nama_kategori')
-        
+        messages.success(request, f"Produk berhasil digenerate.")
     return render(request, 'produk_list.html', {'produk': produk})
     #print(data['data'])
 
@@ -55,6 +55,7 @@ def produk_save(request):
         form = ProdukForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, f"Produk berhasil dibuat.")
             return redirect('produk-list')
     else:
         form = ProdukForm()
@@ -63,6 +64,7 @@ def produk_save(request):
 def produk_edit(request, pk):
     produk = get_object_or_404(Produk, pk=pk)
     status = Status.objects.all().values()
+    messages.success(request, f"Produk {produk.nama_produk} berhasil Edit.")
     kategori = Kategori.objects.all().values()
     return render(request, 'produk_edit.html', {'kategori':kategori, "status":status, "produk":produk})
 

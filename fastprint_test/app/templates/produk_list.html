@@ -81,7 +81,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Produk berhasil dihapus!
+                    {% for message in messages %}
+                        <div>{{ message }}</div>
+                    {% endfor %}
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="successOkBtn" class="btn btn-primary" data-dismiss="modal">Tutup</button>
