@@ -5,10 +5,11 @@ from ..forms import ProdukForm
 from ..helper import helper
 
 def produk_list(request):
-    produk = Produk.objects.filter(status_id=1).select_related('status').select_related('kategori').values('id', 'nama_produk', 'harga', 'status__nama_status', 'kategori__nama_kategori')
+    produk = Produk.objects.filter(status__nama_status='bisa dijual').select_related('status').select_related('kategori').values('id', 'nama_produk', 'harga', 'status__nama_status', 'kategori__nama_kategori')
     # print("product", produk)
     return render(request, 'produk_list.html', {'produk': produk})
 
+#produk Generate
 def produk_generate(request):
     produk = Produk.objects.select_related('status').select_related('kategori').values('id', 'nama_produk', 'harga', 'status__nama_status', 'kategori__nama_kategori')
     if produk.exists() is False :
@@ -49,9 +50,10 @@ def produk_create(request):
     
     return render(request, 'produk_create.html', {'kategori':kategori, "status":status})
 
+#Produk save
 def produk_save(request):
     if request.method == 'POST':
-        print("methode",request.POST['nama_produk'])
+        # print("methode",request.POST['nama_produk'])
         form = ProdukForm(request.POST)
         if form.is_valid():
             form.save()
@@ -64,7 +66,6 @@ def produk_save(request):
 def produk_edit(request, pk):
     produk = get_object_or_404(Produk, pk=pk)
     status = Status.objects.all().values()
-    messages.success(request, f"Produk {produk.nama_produk} berhasil Edit.")
     kategori = Kategori.objects.all().values()
     return render(request, 'produk_edit.html', {'kategori':kategori, "status":status, "produk":produk})
 
@@ -74,6 +75,7 @@ def produk_update(request, pk):
         form = ProdukForm(request.POST, instance=produk)
         if form.is_valid():
             form.save()
+            messages.success(request, f"Produk {produk.nama_produk} berhasil Edit.")
             return redirect('produk-list')
     else:
         form = ProdukForm(instance=produk)

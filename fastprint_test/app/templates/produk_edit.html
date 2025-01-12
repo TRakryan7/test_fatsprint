@@ -12,7 +12,7 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="nama_produk">Nama</label>
-                        <input type="text" class="form-control" value={{produk.nama_produk}} name="nama_produk" id="nama_produk" placeholder="Flexy">
+                        <input type="text" class="form-control" value="{{produk.nama_produk}}" name="nama_produk" id="nama_produk" placeholder="Flexy">
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -38,7 +38,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">Rp.</span>
                             </div>
-                            <input type="text" value={{produk.harga}} class="form-control" id="price" name="harga" aria-label="Harga (dalam rupiah)">
+                            <input type="text" value="{{produk.harga}}" class="form-control" id="price" name="harga" aria-label="Harga (dalam rupiah)">
                             <div class="input-group-append">
                               <span class="input-group-text">.00</span>
                             </div>

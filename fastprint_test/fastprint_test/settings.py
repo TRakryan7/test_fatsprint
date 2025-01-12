@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'fastprint_test.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fastprint_test', 
+        'NAME': 'fastprint', 
         'USER': 'root',          
         'PASSWORD': '',  
         'HOST': '127.0.0.1',     
